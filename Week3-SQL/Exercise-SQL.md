@@ -15,12 +15,18 @@ For this section of the exercise we will be using the `bigquery-public-data.aust
 
 5. Write a query that tells us how many rows are in the table. 
 	```
-	[YOUR QUERY HERE]
+	SELECT
+  	  COUNT(*) AS Number_of_rows
+	FROM
+  	  `bigquery-public-data.austin_311.311_service_requests`
 	```
 
 7. Write a query that tells us how many _distinct_ values there are in the complaint_description column.
 	``` 
-	[YOUR QUERY HERE]
+	SELECT
+ 	 COUNT(DISTINCT complaint_description) AS distinct_complaints
+	FROM
+	 `bigquery-public-data.austin_311.311_service_requests`
 	```
   
 8. Write a query that counts how many times each owning_department appears in the table and orders them from highest to lowest. 
@@ -30,7 +36,17 @@ For this section of the exercise we will be using the `bigquery-public-data.aust
 
 9. Write a query that lists the top 5 complaint_description that appear most and the amount of times they appear in this table. (hint... limit)
 	```
-	[YOUR QUERY HERE]
+	SELECT
+  	  complaint_description,
+  	  COUNT(complaint_description) AS d_counts
+	FROM
+  	  `bigquery-public-data.austin_311.311_service_requests`
+	GROUP BY
+  	  complaint_description
+	ORDER BY
+ 	  d_counts DESC
+	LIMIT
+  	  5
 	  ```
 10. Write a query that lists and counts all the complaint_description, just for the where the owning_department is 'Animal Services Office'.
 	```
